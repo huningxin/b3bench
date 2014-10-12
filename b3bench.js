@@ -39,24 +39,24 @@ function __ZN35btSequentialImpulseConstraintSolver37resolveSingleConstraintRowGe
  $62 = SIMD.float32x4.sub($16, SIMD.float32x4.mul($36, $60));
  $64 = SIMD.float32x4.sub($62, SIMD.float32x4.mul($57, $60));
  $65 = SIMD.float32x4.add($2, $64);
- $67 = SIMD.float32x4.fromInt32x4Bits(SIMD.int32x4(SIMD.float32x4.lessThan(SIMD.float32x4($65), SIMD.float32x4($5))));
- $69 = SIMD.float32x4.fromInt32x4Bits(SIMD.int32x4(SIMD.float32x4.lessThan(SIMD.float32x4($65), SIMD.float32x4($8))));
+ $67 = SIMD.float32x4.fromInt32x4Bits(SIMD.float32x4.lessThan($65, $5));
+ $69 = SIMD.float32x4.fromInt32x4Bits(SIMD.float32x4.lessThan($65, $8));
  $70 = SIMD.float32x4.sub($5, $2);
- $71 = SIMD.float32x4(SIMD.float32x4.and(SIMD.float32x4($67), SIMD.float32x4($70)));
- $72 = SIMD.float32x4(SIMD.float32x4.not(SIMD.float32x4($67)));
- $73 = SIMD.float32x4(SIMD.float32x4.and(SIMD.float32x4($72), SIMD.float32x4($64)));
- $74 = SIMD.float32x4(SIMD.float32x4.or(SIMD.float32x4($71), SIMD.float32x4($73)));
- $75 = SIMD.float32x4(SIMD.float32x4.and(SIMD.float32x4($67), SIMD.float32x4($5)));
- $76 = SIMD.float32x4(SIMD.float32x4.and(SIMD.float32x4($72), SIMD.float32x4($65)));
- $77 = SIMD.float32x4(SIMD.float32x4.or(SIMD.float32x4($75), SIMD.float32x4($76)));
+ $71 = SIMD.float32x4.and($67, $70);
+ $72 = SIMD.float32x4.not($67);
+ $73 = SIMD.float32x4.and($72, $64);
+ $74 = SIMD.float32x4.or($71, $73);
+ $75 = SIMD.float32x4.and($67, $5);
+ $76 = SIMD.float32x4.and($72, $65);
+ $77 = SIMD.float32x4.or($75, $76);
  $79 = SIMD.float32x4.sub($8, $2);
- $80 = SIMD.float32x4(SIMD.float32x4.and(SIMD.float32x4($69), SIMD.float32x4($74)));
- $81 = SIMD.float32x4(SIMD.float32x4.not(SIMD.float32x4($69)));
- $82 = SIMD.float32x4(SIMD.float32x4.and(SIMD.float32x4($81), SIMD.float32x4($79)));
- $83 = SIMD.float32x4(SIMD.float32x4.or(SIMD.float32x4($80), SIMD.float32x4($82)));
- $84 = SIMD.float32x4(SIMD.float32x4.and(SIMD.float32x4($69), SIMD.float32x4($77)));
- $85 = SIMD.float32x4(SIMD.float32x4.and(SIMD.float32x4($81), SIMD.float32x4($8)));
- $86 = SIMD.float32x4(SIMD.float32x4.or(SIMD.float32x4($84), SIMD.float32x4($85)));
+ $80 = SIMD.float32x4.and($69, $74);
+ $81 = SIMD.float32x4.not($69);
+ $82 = SIMD.float32x4.and($81, $79);
+ $83 = SIMD.float32x4.or($80, $82);
+ $84 = SIMD.float32x4.and($69, $77);
+ $85 = SIMD.float32x4.and($81, $8);
+ $86 = SIMD.float32x4.or($84, $85);
  HEAPF32.setFloat32x4($c + 112 | 0, $86);
  $89 = SIMD.float32x4.mul($18, HEAPF32.getFloat32x4($body1 + 128 | 0));
  $92 = SIMD.float32x4.mul($38, HEAPF32.getFloat32x4($body2 + 128 | 0));
@@ -178,7 +178,7 @@ function bench_simd() {
     duration += (Date.now() - start);
     sum += checksum();
   }
-	print("simd version checksum: " + sum + " duration: " + duration);
+	print("simd version checksum:   " + sum + " duration: " + duration);
   return duration;
 }
 
