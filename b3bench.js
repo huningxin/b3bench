@@ -14,23 +14,23 @@ function __ZN35btSequentialImpulseConstraintSolver37resolveSingleConstraintRowGe
  $11 = SIMD.float32x4.splat($10);
  $13 = +HEAPF32[$c + 140 >> 2];
  $16 = SIMD.float32x4.sub($11, SIMD.float32x4.mul($2, SIMD.float32x4.splat($13)));
- $18 = SIMD.float32x4.load(buffer, $c + 16 | 0);
- $21 = SIMD.float32x4.mul($18, SIMD.float32x4.load(buffer, $body1 + 64 | 0));
+ $18 = HEAPF32.getFloat32x4($c + 16 | 0);
+ $21 = SIMD.float32x4.mul($18, HEAPF32.getFloat32x4($body1 + 64 | 0));
  $22 = SIMD.float32x4.shuffle($21, SIMD.XXXX);
  $23 = SIMD.float32x4.shuffle($21, SIMD.YYYY);
  $26 = SIMD.float32x4.add($22, SIMD.float32x4.add($23, SIMD.float32x4.shuffle($21, SIMD.ZZZZ)));
- $27 = SIMD.float32x4.load(buffer, $c);
- $30 = SIMD.float32x4.mul($27, SIMD.float32x4.load(buffer, $body1 + 80 | 0));
+ $27 = HEAPF32.getFloat32x4($c);
+ $30 = SIMD.float32x4.mul($27, HEAPF32.getFloat32x4($body1 + 80 | 0));
  $31 = SIMD.float32x4.shuffle($30, SIMD.XXXX);
  $32 = SIMD.float32x4.shuffle($30, SIMD.YYYY);
  $36 = SIMD.float32x4.add($26, SIMD.float32x4.add($31, SIMD.float32x4.add($32, SIMD.float32x4.shuffle($30, SIMD.ZZZZ))));
- $38 = SIMD.float32x4.load(buffer, $c + 48 | 0);
- $41 = SIMD.float32x4.mul($38, SIMD.float32x4.load(buffer, $body2 + 64 | 0));
+ $38 = HEAPF32.getFloat32x4($c + 48 | 0);
+ $41 = SIMD.float32x4.mul($38, HEAPF32.getFloat32x4($body2 + 64 | 0));
  $42 = SIMD.float32x4.shuffle($41, SIMD.XXXX);
  $43 = SIMD.float32x4.shuffle($41, SIMD.YYYY);
  $46 = SIMD.float32x4.add($42, SIMD.float32x4.add($43, SIMD.float32x4.shuffle($41, SIMD.ZZZZ)));
- $48 = SIMD.float32x4.load(buffer, $c + 32 | 0);
- $51 = SIMD.float32x4.mul($48, SIMD.float32x4.load(buffer, $body2 + 80 | 0));
+ $48 = HEAPF32.getFloat32x4($c + 32 | 0);
+ $51 = SIMD.float32x4.mul($48, HEAPF32.getFloat32x4($body2 + 80 | 0));
  $52 = SIMD.float32x4.shuffle($51, SIMD.XXXX);
  $53 = SIMD.float32x4.shuffle($51, SIMD.YYYY);
  $57 = SIMD.float32x4.add($46, SIMD.float32x4.add($52, SIMD.float32x4.add($53, SIMD.float32x4.shuffle($51, SIMD.ZZZZ))));
@@ -39,8 +39,8 @@ function __ZN35btSequentialImpulseConstraintSolver37resolveSingleConstraintRowGe
  $62 = SIMD.float32x4.sub($16, SIMD.float32x4.mul($36, $60));
  $64 = SIMD.float32x4.sub($62, SIMD.float32x4.mul($57, $60));
  $65 = SIMD.float32x4.add($2, $64);
- $67 = SIMD.float32x4.fromInt32x4Bits(SIMD_int32x4(SIMD.float32x4.lessThan(SIMD.float32x4($65), SIMD.float32x4($5))));
- $69 = SIMD.float32x4.fromInt32x4Bits(SIMD_int32x4(SIMD.float32x4.lessThan(SIMD.float32x4($65), SIMD.float32x4($8))));
+ $67 = SIMD.float32x4.fromInt32x4Bits(SIMD.int32x4(SIMD.float32x4.lessThan(SIMD.float32x4($65), SIMD.float32x4($5))));
+ $69 = SIMD.float32x4.fromInt32x4Bits(SIMD.int32x4(SIMD.float32x4.lessThan(SIMD.float32x4($65), SIMD.float32x4($8))));
  $70 = SIMD.float32x4.sub($5, $2);
  $71 = SIMD.float32x4(SIMD.float32x4.and(SIMD.float32x4($67), SIMD.float32x4($70)));
  $72 = SIMD.float32x4(SIMD.float32x4.not(SIMD.float32x4($67)));
@@ -57,21 +57,21 @@ function __ZN35btSequentialImpulseConstraintSolver37resolveSingleConstraintRowGe
  $84 = SIMD.float32x4(SIMD.float32x4.and(SIMD.float32x4($69), SIMD.float32x4($77)));
  $85 = SIMD.float32x4(SIMD.float32x4.and(SIMD.float32x4($81), SIMD.float32x4($8)));
  $86 = SIMD.float32x4(SIMD.float32x4.or(SIMD.float32x4($84), SIMD.float32x4($85)));
- SIMD.float32x4.store(buffer, $c + 112 | 0, $86);
- $89 = SIMD.float32x4.mul($18, SIMD.float32x4.load(buffer, $body1 + 128 | 0));
- $92 = SIMD.float32x4.mul($38, SIMD.float32x4.load(buffer, $body2 + 128 | 0));
- $93 = SIMD.float32x4.load(buffer, $body1 + 64 | 0);
+ HEAPF32.setFloat32x4($c + 112 | 0, $86);
+ $89 = SIMD.float32x4.mul($18, HEAPF32.getFloat32x4($body1 + 128 | 0));
+ $92 = SIMD.float32x4.mul($38, HEAPF32.getFloat32x4($body2 + 128 | 0));
+ $93 = HEAPF32.getFloat32x4($body1 + 64 | 0);
  $95 = SIMD.float32x4.add(SIMD.float32x4.mul($83, $89), $93);
- SIMD.float32x4.store(buffer, $body1 + 64 | 0, $95);
- $96 = SIMD.float32x4.load(buffer, $body1 + 80 | 0);
- $100 = SIMD.float32x4.add($96, SIMD.float32x4.mul($83, SIMD.float32x4.load(buffer, $c + 64 | 0)));
- SIMD.float32x4.store(buffer, $body1 + 80 | 0, $100);
- $101 = SIMD.float32x4.load(buffer, $body2 + 64 | 0);
+ HEAPF32.setFloat32x4($body1 + 64 | 0, $95);
+ $96 = HEAPF32.getFloat32x4($body1 + 80 | 0);
+ $100 = SIMD.float32x4.add($96, SIMD.float32x4.mul($83, HEAPF32.getFloat32x4($c + 64 | 0)));
+ HEAPF32.setFloat32x4($body1 + 80 | 0, $100);
+ $101 = HEAPF32.getFloat32x4($body2 + 64 | 0);
  $103 = SIMD.float32x4.add(SIMD.float32x4.mul($83, $92), $101);
- SIMD.float32x4.store(buffer, $body2 + 64 | 0, $103);
- $104 = SIMD.float32x4.load(buffer, $body2 + 80 | 0);
- $108 = SIMD.float32x4.add($104, SIMD.float32x4.mul($83, SIMD.float32x4.load(buffer, $c + 80 | 0)));
- SIMD.float32x4.store(buffer, $body2 + 80 | 0, $108);
+ HEAPF32.setFloat32x4($body2 + 64 | 0, $103);
+ $104 = HEAPF32.getFloat32x4($body2 + 80 | 0);
+ $108 = SIMD.float32x4.add($104, SIMD.float32x4.mul($83, HEAPF32.getFloat32x4($c + 80 | 0)));
+ HEAPF32.setFloat32x4($body2 + 80 | 0, $108);
  STACKTOP = sp;
  return;
 }
@@ -139,20 +139,36 @@ var HEAP32 = new Int32Array(HEAPF32.buffer);
 var STACKTOP;
 var sp;
 
+function init() {
+  for (var i = 0; i < HEAPF32.length; ++i) {
+    HEAPF32[i] = 0.01 * i;
+  }
+}
+
+function checksum() {
+  var sum = 0.0;
+  for (var i = 0; i < HEAPF32.length; ++i) {
+    sum += HEAPF32[i];
+  }
+  return sum;
+}
+
 function bench_scalar() {
+  init();
 	var start = Date.now();
 	for (var i = 0; i < 100000; ++i)
-		__ZN35btSequentialImpulseConstraintSolver33resolveSingleConstraintRowGenericER12btSolverBodyS1_RK18btSolverConstraint(0, 0, 0);
+		__ZN35btSequentialImpulseConstraintSolver33resolveSingleConstraintRowGenericER12btSolverBodyS1_RK18btSolverConstraint(0,  100, 200);
 	var time = Date.now() - start;
-	print("scalar version: " + time);
+	print("scalar version checksum: " + checksum() + " duration: " + time);
 }
 
 function bench_simd() {
+  init();
 	var start = Date.now();
 	for (var i = 0; i < 100000; ++i)
-		__ZN35btSequentialImpulseConstraintSolver37resolveSingleConstraintRowGenericSIMDER12btSolverBodyS1_RK18btSolverConstraint(0, 0, 0);
+		__ZN35btSequentialImpulseConstraintSolver37resolveSingleConstraintRowGenericSIMDER12btSolverBodyS1_RK18btSolverConstraint(0, 100, 200);
 	var time = Date.now() - start;
-	print("simd version: " + time);
+	print("simd version checksum: " + checksum() + " duration: " + time);
 }
 
 bench_scalar();
