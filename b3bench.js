@@ -134,14 +134,15 @@ function __ZN35btSequentialImpulseConstraintSolver33resolveSingleConstraintRowGe
  return;
 }
 
-var HEAPF32 = new Float32Array(1000);
+var N = 100000;
+var HEAPF32 = new Float32Array(N + 300);
 var HEAP32 = new Int32Array(HEAPF32.buffer);
 var STACKTOP;
 var sp;
 
 function init() {
   for (var i = 0; i < HEAPF32.length; ++i) {
-    HEAPF32[i] = 0.01 * i;
+    HEAPF32[i] = 0.0001 * i;
   }
 }
 
@@ -155,21 +156,32 @@ function checksum() {
 
 function bench_scalar() {
   init();
-	var start = Date.now();
-	for (var i = 0; i < 100000; ++i)
-		__ZN35btSequentialImpulseConstraintSolver33resolveSingleConstraintRowGenericER12btSolverBodyS1_RK18btSolverConstraint(0,  100, 200);
-	var time = Date.now() - start;
-	print("scalar version checksum: " + checksum() + " duration: " + time);
+  var duration = 0.0;
+  var sum = 0.0;
+	for (var i = 0; i < N; ++i) {
+    var start = Date.now();
+		__ZN35btSequentialImpulseConstraintSolver33resolveSingleConstraintRowGenericER12btSolverBodyS1_RK18btSolverConstraint(i,  i + 1, i + 2);
+    duration += (Date.now() - start);
+    sum += checksum();
+  }
+	print("scalar version checksum: " + sum + " duration: " + duration);
+  return duration;
 }
 
 function bench_simd() {
   init();
-	var start = Date.now();
-	for (var i = 0; i < 100000; ++i)
-		__ZN35btSequentialImpulseConstraintSolver37resolveSingleConstraintRowGenericSIMDER12btSolverBodyS1_RK18btSolverConstraint(0, 100, 200);
-	var time = Date.now() - start;
-	print("simd version checksum: " + checksum() + " duration: " + time);
+	var duration = 0.0;
+  var sum = 0.0;
+	for (var i = 0; i < N; ++i) {
+    var start = Date.now();
+		__ZN35btSequentialImpulseConstraintSolver37resolveSingleConstraintRowGenericSIMDER12btSolverBodyS1_RK18btSolverConstraint(i, i + 1, i + 2);
+    duration += (Date.now() - start);
+    sum += checksum();
+  }
+	print("simd version checksum: " + sum + " duration: " + duration);
+  return duration;
 }
 
-bench_scalar();
-bench_simd();
+var scalar = bench_scalar();
+var simd = bench_simd();
+print("speedup: " + scalar/simd);
