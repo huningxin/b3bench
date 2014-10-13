@@ -134,6 +134,7 @@ function __ZN35btSequentialImpulseConstraintSolver33resolveSingleConstraintRowGe
  return;
 }
 
+var FRAME = 64;
 var N = 100000;
 var HEAPF32 = new Float32Array(N + 300);
 var HEAP32 = new Int32Array(HEAPF32.buffer);
@@ -142,43 +143,43 @@ var sp;
 
 function init() {
   for (var i = 0; i < HEAPF32.length; ++i) {
-    HEAPF32[i] = 0.0001 * i;
+    HEAPF32[i] = 0.000001;
   }
 }
 
-function checksum() {
-  var sum = 0.0;
-  for (var i = 0; i < HEAPF32.length; ++i) {
-    sum += HEAPF32[i];
-  }
-  return sum;
+function checksum(i) {
+  return HEAPF32[i];
 }
 
 function bench_scalar() {
   init();
   var duration = 0.0;
   var sum = 0.0;
-	for (var i = 0; i < N; ++i) {
-    var start = Date.now();
-		__ZN35btSequentialImpulseConstraintSolver33resolveSingleConstraintRowGenericER12btSolverBodyS1_RK18btSolverConstraint(i,  i + 1, i + 2);
-    duration += (Date.now() - start);
-    sum += checksum();
+  for (var f = 0; f < FRAME; ++f) {
+    for (var i = 0; i < N; ++i) {
+      var start = Date.now();
+      __ZN35btSequentialImpulseConstraintSolver33resolveSingleConstraintRowGenericER12btSolverBodyS1_RK18btSolverConstraint(i,  i + 100, i + 200);
+      duration += (Date.now() - start);
+      sum += checksum(i);
+    }
   }
-	print("scalar version checksum: " + sum + " duration: " + duration);
+  print("scalar version checksum: " + sum + " ms/frame: " + duration / FRAME);
   return duration;
 }
 
 function bench_simd() {
   init();
-	var duration = 0.0;
+  var duration = 0.0;
   var sum = 0.0;
-	for (var i = 0; i < N; ++i) {
-    var start = Date.now();
-		__ZN35btSequentialImpulseConstraintSolver37resolveSingleConstraintRowGenericSIMDER12btSolverBodyS1_RK18btSolverConstraint(i, i + 1, i + 2);
-    duration += (Date.now() - start);
-    sum += checksum();
+  for (var f = 0; f < FRAME; ++f) {
+    for (var i = 0; i < N; ++i) {
+      var start = Date.now();
+      __ZN35btSequentialImpulseConstraintSolver37resolveSingleConstraintRowGenericSIMDER12btSolverBodyS1_RK18btSolverConstraint(i, i + 100, i + 200);
+      duration += (Date.now() - start);
+      sum += checksum(i);
+    }
   }
-	print("simd version checksum:   " + sum + " duration: " + duration);
+  print("simd version checksum:   " + sum + " ms/frame: " + duration / FRAME);
   return duration;
 }
 
